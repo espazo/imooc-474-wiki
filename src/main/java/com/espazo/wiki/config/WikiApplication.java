@@ -1,11 +1,14 @@
-package com.espazo.wiki;
+package com.espazo.wiki.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
+//@ComponentScan({"com.espazo.wiki", "com.test"})
+@ComponentScan("com.espazo.wiki")
 @SpringBootApplication
 public class WikiApplication {
 
@@ -16,7 +19,7 @@ public class WikiApplication {
 		SpringApplication app = new SpringApplication(WikiApplication.class);
 		Environment env = app.run(args).getEnvironment();
 		LOG.info("Successfully started");
-		LOG.info("address: http://localhost:{}", env.getProperty("server.port"));
+		LOG.info("address: http://localhost:{}/", env.getProperty("server.port"));
 
 	}
 
