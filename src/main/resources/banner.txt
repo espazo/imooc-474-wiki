@@ -1,0 +1,19 @@
+                                                                                                                  
+                                                                                                                  
+RRRRRRRRRRRRRRRRR                       iiii       XXXXXXX       XXXXXXX  iiii                                    
+R::::::::::::::::R                     i::::i      X:::::X       X:::::X i::::i                                   
+R::::::RRRRRR:::::R                     iiii       X:::::X       X:::::X  iiii                                    
+RR:::::R     R:::::R                               X::::::X     X::::::X                                          
+  R::::R     R:::::Ruuuuuu    uuuuuu  iiiiiii      XXX:::::X   X:::::XXXiiiiiii   aaaaaaaaaaaaa     ooooooooooo   
+  R::::R     R:::::Ru::::u    u::::u  i:::::i         X:::::X X:::::X   i:::::i   a::::::::::::a  oo:::::::::::oo 
+  R::::RRRRRR:::::R u::::u    u::::u   i::::i          X:::::X:::::X     i::::i   aaaaaaaaa:::::ao:::::::::::::::o
+  R:::::::::::::RR  u::::u    u::::u   i::::i           X:::::::::X      i::::i            a::::ao:::::ooooo:::::o
+  R::::RRRRRR:::::R u::::u    u::::u   i::::i           X:::::::::X      i::::i     aaaaaaa:::::ao::::o     o::::o
+  R::::R     R:::::Ru::::u    u::::u   i::::i          X:::::X:::::X     i::::i   aa::::::::::::ao::::o     o::::o
+  R::::R     R:::::Ru::::u    u::::u   i::::i         X:::::X X:::::X    i::::i  a::::aaaa::::::ao::::o     o::::o
+  R::::R     R:::::Ru:::::uuuu:::::u   i::::i      XXX:::::X   X:::::XXX i::::i a::::a    a:::::ao::::o     o::::o
+RR:::::R     R:::::Ru:::::::::::::::uui::::::i     X::::::X     X::::::Xi::::::ia::::a    a:::::ao:::::ooooo:::::o
+R::::::R     R:::::R u:::::::::::::::ui::::::i     X:::::X       X:::::Xi::::::ia:::::aaaa::::::ao:::::::::::::::o
+R::::::R     R:::::R  uu::::::::uu:::ui::::::i     X:::::X       X:::::Xi::::::i a::::::::::aa:::aoo:::::::::::oo 
+RRRRRRRR     RRRRRRR    uuuuuuuu  uuuuiiiiiiii     XXXXXXX       XXXXXXXiiiiiiii  aaaaaaaaaa  aaaa  ooooooooooo
+
