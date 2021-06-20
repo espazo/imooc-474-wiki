@@ -1,0 +1,21 @@
+GET http://localhost:1024/hello
+Accept: application/text
+
+> {%
+client.test("test-hello", function() {
+    client.log("test interface hello");
+    client.log(response.body);
+    client.log(JSON.stringify(response.body));
+    client.assert(response.status === 200, "CODE is not 200")
+    client.assert(response.body === "hello interface GET", "ERROR response")
+})
+ %}
+
+### Live Templates: gtr
+
+POST http://localhost:1024/hello/post
+Content-Type: application/x-www-form-urlencoded
+
+name=TEST
+
+### Live Templates: ptrp
