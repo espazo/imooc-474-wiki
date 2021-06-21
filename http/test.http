@@ -19,3 +19,8 @@ Content-Type: application/x-www-form-urlencoded
 name=TEST
 
 ### Live Templates: ptrp
+
+GET http://localhost:1024/test/list
+Accept: application/json
+
+###

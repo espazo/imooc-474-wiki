@@ -4,4 +4,6 @@ CREATE TABLE `test` (
     `name` VARCHAR(50) COMMENT 'name',
     `password` VARCHAR(50) COMMENT 'password',
     PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4 COMMENT='test'
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4 COMMENT='test';
+
+insert into `test` (id, name, password) value (1, 'test', 'password');
