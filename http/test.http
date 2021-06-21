@@ -7,7 +7,7 @@ client.test("test-hello", function() {
     client.log(response.body);
     client.log(JSON.stringify(response.body));
     client.assert(response.status === 200, "CODE is not 200")
-    client.assert(response.body === "hello interface GET", "ERROR response")
+    client.assert(response.body === "hello interface GET test", "ERROR response")
 })
  %}
 
