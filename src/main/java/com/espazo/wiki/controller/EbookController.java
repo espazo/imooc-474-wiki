@@ -1,7 +1,7 @@
 package com.espazo.wiki.controller;
 
-import com.espazo.wiki.domain.Demo;
-import com.espazo.wiki.service.DemoService;
+import com.espazo.wiki.domain.Ebook;
+import com.espazo.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,14 +10,14 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/demo")
-public class DemoController {
+@RequestMapping("/ebook")
+public class EbookController {
 
     @Resource
-    private DemoService demoService;
+    private EbookService ebookService;
 
     @GetMapping("list")
-    public List<Demo> list() {
-        return demoService.list();
+    public List<Ebook> list() {
+        return ebookService.list();
     }
 }

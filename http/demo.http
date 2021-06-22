@@ -1,4 +1,4 @@
-GET http://localhost:1024/demo/list2
+GET http://localhost:1024/demo/list
 Accept: application/json
 
 ### gtr
