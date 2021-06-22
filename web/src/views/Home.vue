@@ -2,8 +2,6 @@
   <a-layout>
     <a-layout-sider style="background: #fff" width="200">
       <a-menu
-          v-model:openKeys="openKeys"
-          v-model:selectedKeys="selectedKeys2"
           :style="{ height: '100%', borderRight: 0 }"
           mode="inline"
       >
@@ -11,7 +9,7 @@
           <template #title>
               <span>
                 <user-outlined/>
-                subnav 12
+                subnav 1
               </span>
           </template>
           <a-menu-item key="1">option1</a-menu-item>
@@ -55,8 +53,15 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'Home',
+  setup() {
+    console.log('setup');
+    axios.get('http://localhost:1024/ebook/list?name=Spring').then((response) => {
+      console.log(response);
+    })
+  }
 });
 </script>

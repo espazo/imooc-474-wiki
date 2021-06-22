@@ -2,7 +2,6 @@
   <a-layout-header class="header">
     <div class="logo"/>
     <a-menu
-        v-model:selectedKeys="selectedKeys1"
         :style="{ lineHeight: '64px' }"
         mode="horizontal"
         theme="dark"
