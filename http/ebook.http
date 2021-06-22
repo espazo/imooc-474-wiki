@@ -2,3 +2,8 @@ GET http://localhost:1024/ebook/list?name=Spring
 Accept: application/json
 
 ### gtr
+
+GET http://localhost:1024/ebook/list
+Accept: application/json
+
+###
