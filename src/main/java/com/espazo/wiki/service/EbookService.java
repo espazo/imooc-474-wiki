@@ -5,6 +5,7 @@ import com.espazo.wiki.domain.EbookExample;
 import com.espazo.wiki.mapper.EbookMapper;
 import com.espazo.wiki.req.EbookReq;
 import com.espazo.wiki.resp.EbookResp;
+import com.espazo.wiki.resp.PageResp;
 import com.espazo.wiki.util.CopyUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,7 +25,7 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
-    public List<EbookResp> list(EbookReq req) {
+    public PageResp<EbookResp> list(EbookReq req) {
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
 
@@ -32,7 +33,7 @@ public class EbookService {
             criteria.andNameLike("%" + req.getName() + "%");
         }
 
-        PageHelper.startPage(1, 3);
+        PageHelper.startPage(req.getPage(), req.getSize());
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 
         PageInfo<Ebook> ebookPageInfo = new PageInfo<>(ebookList);
@@ -50,7 +51,10 @@ public class EbookService {
 //        }
 
         List<EbookResp> list = CopyUtil.copyList(ebookList, EbookResp.class);
+        PageResp<EbookResp> pageResp = new PageResp<>();
+        pageResp.setTotal(ebookPageInfo.getTotal());
+        pageResp.setList(list);
 
-        return list;
+        return pageResp;
     }
 }
