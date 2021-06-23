@@ -16,7 +16,7 @@
         </template>
         <template v-slot:action="{ text, record }">
           <a-space size="small">
-            <a-button type="primary">
+            <a-button type="primary" @click="edit">
               编辑
             </a-button>
             <a-button type="danger">
@@ -27,6 +27,15 @@
       </a-table>
     </a-layout-content>
   </a-layout>
+
+  <a-modal
+      title="电子书表单"
+      v-model:visible="modalVisible"
+      :confirm-loading="modalLoading"
+      @ok="handleModalOK"
+  >
+    <p>testa</p>
+  </a-modal>
 </template>
 
 <script lang="ts">
@@ -115,6 +124,21 @@ export default defineComponent({
       });
     };
 
+    // ------- 表单 -------
+    const modalVisible = ref(false);
+    const modalLoading = ref(false);
+    const handleModalOK = () => {
+      modalLoading.value = true;
+      setTimeout(() => {
+        modalVisible.value = false;
+        modalLoading.value = false;
+      }, 2000);
+    }
+
+    // 编辑
+    const edit = () => {
+      modalVisible.value = true;
+    }
 
     onMounted(() => {
       handleQuery({
@@ -129,6 +153,11 @@ export default defineComponent({
       columns,
       loading,
       handleTableChange,
+
+      edit,
+      modalVisible,
+      modalLoading,
+      handleModalOK
     }
   }
 });
