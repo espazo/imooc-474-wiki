@@ -6,4 +6,9 @@ Accept: application/json
 GET http://localhost:1024/ebook/list
 Accept: application/json
 
-###
+### gtr
+
+GET http://localhost:1024/ebook/list?page=1&size=4
+Accept: application/json
+
+### gtrp
