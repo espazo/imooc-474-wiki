@@ -1,6 +1,6 @@
-package com.espazo.wiki.resp;
+package com.espazo.wiki.req;
 
-public class EbookResp {
+public class EbookSaveReq {
     private Long id;
 
     private String name;
