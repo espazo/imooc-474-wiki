@@ -12,3 +12,17 @@ GET http://localhost:1024/ebook/list?page=1&size=4
 Accept: application/json
 
 ### gtrp
+
+POST http://localhost:1024/ebook/save?name=2
+Content-Type: application/json
+
+{}
+
+### ptr
+
+POST http://localhost:80/api/item
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+### ptrp

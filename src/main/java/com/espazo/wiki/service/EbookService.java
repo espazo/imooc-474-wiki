@@ -3,8 +3,9 @@ package com.espazo.wiki.service;
 import com.espazo.wiki.domain.Ebook;
 import com.espazo.wiki.domain.EbookExample;
 import com.espazo.wiki.mapper.EbookMapper;
-import com.espazo.wiki.req.EbookReq;
-import com.espazo.wiki.resp.EbookResp;
+import com.espazo.wiki.req.EbookQueryReq;
+import com.espazo.wiki.req.EbookSaveReq;
+import com.espazo.wiki.resp.EbookQueryResp;
 import com.espazo.wiki.resp.PageResp;
 import com.espazo.wiki.util.CopyUtil;
 import com.github.pagehelper.PageHelper;
@@ -25,7 +26,7 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
-    public PageResp<EbookResp> list(EbookReq req) {
+    public PageResp<EbookQueryResp> list(EbookQueryReq req) {
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
 
@@ -50,11 +51,23 @@ public class EbookService {
 //            respList.add(ebookResp);
 //        }
 
-        List<EbookResp> list = CopyUtil.copyList(ebookList, EbookResp.class);
-        PageResp<EbookResp> pageResp = new PageResp<>();
+        List<EbookQueryResp> list = CopyUtil.copyList(ebookList, EbookQueryResp.class);
+        PageResp<EbookQueryResp> pageResp = new PageResp<>();
         pageResp.setTotal(ebookPageInfo.getTotal());
         pageResp.setList(list);
 
         return pageResp;
+    }
+
+    /**
+     * 保存
+     */
+    public void save(EbookSaveReq req) {
+        Ebook ebook = CopyUtil.copy(req, Ebook.class);
+        if (ObjectUtils.isEmpty(req.getId())) {
+            ebookMapper.insert(ebook);
+        } else {
+            ebookMapper.updateByPrimaryKey(ebook);
+        }
     }
 }
