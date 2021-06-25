@@ -55,7 +55,7 @@
   </a-layout>
 
   <a-modal
-      title="电子书表单"
+      title="房产信息表单"
       v-model:visible="modalVisible"
       :confirm-loading="modalLoading"
       @ok="handleModalOK"
@@ -64,13 +64,13 @@
       <a-form-item label="封面">
         <a-input v-model:value="ebook.cover"/>
       </a-form-item>
-      <a-form-item label="名称">
+      <a-form-item label="房名">
         <a-input v-model:value="ebook.name"/>
       </a-form-item>
-      <a-form-item label="分类一">
+      <a-form-item label="几房">
         <a-input v-model:value="ebook.category1Id"/>
       </a-form-item>
-      <a-form-item label="分类二">
+      <a-form-item label="价格">
         <a-input v-model:value="ebook.category2Id"/>
       </a-form-item>
       <a-form-item label="描述">
@@ -106,30 +106,30 @@ export default defineComponent({
         slots: { customRender: 'cover' }
       },
       {
-        title: '名称',
+        title: '房名',
         dataIndex: 'name'
       },
       {
-        title: '分类一',
+        title: '几房',
         key: 'category1Id',
         dataIndex: 'category1Id'
       },
       {
-        title: '分类二',
+        title: '价格',
         dataIndex: 'category2Id'
       },
-      {
-        title: '文档数',
-        dataIndex: 'docCount'
-      },
-      {
-        title: '阅读数',
-        dataIndex: 'viewCount'
-      },
-      {
-        title: '点赞数',
-        dataIndex: 'voteCount'
-      },
+      // {
+      //   title: '评论数',
+      //   dataIndex: 'docCount'
+      // },
+      // {
+      //   title: '阅读数',
+      //   dataIndex: 'viewCount'
+      // },
+      // {
+      //   title: '点赞数',
+      //   dataIndex: 'voteCount'
+      // },
       {
         title: 'Action',
         key: 'action',

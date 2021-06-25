@@ -41,6 +41,6 @@
                              type="MAPPER"/>
 
         <!--        <table tableName="demo" domainObjectName="Demo"/>-->
-        <table tableName="ebook"/>
+        <table tableName="user"/>
     </context>
 </generatorConfiguration>

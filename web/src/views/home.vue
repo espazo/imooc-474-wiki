@@ -9,37 +9,13 @@
           <template #title>
               <span>
                 <user-outlined/>
-                subnav 1
+                几房
               </span>
           </template>
-          <a-menu-item key="1">option1</a-menu-item>
-          <a-menu-item key="2">option2</a-menu-item>
-          <a-menu-item key="3">option3</a-menu-item>
-          <a-menu-item key="4">option4</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <template #title>
-              <span>
-                <laptop-outlined/>
-                subnav 2
-              </span>
-          </template>
-          <a-menu-item key="5">option5</a-menu-item>
-          <a-menu-item key="6">option6</a-menu-item>
-          <a-menu-item key="7">option7</a-menu-item>
-          <a-menu-item key="8">option8</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub3">
-          <template #title>
-              <span>
-                <notification-outlined/>
-                subnav 3
-              </span>
-          </template>
-          <a-menu-item key="9">option9</a-menu-item>
-          <a-menu-item key="10">option10</a-menu-item>
-          <a-menu-item key="11">option11</a-menu-item>
-          <a-menu-item key="12">option12</a-menu-item>
+          <a-menu-item key="1" @click="f(1)">1 房</a-menu-item>
+          <a-menu-item key="2" @click="f(2)">2 房</a-menu-item>
+          <a-menu-item key="3" @click="f(3)">3 房</a-menu-item>
+          <a-menu-item key="4" @click="f(4)">4 房</a-menu-item>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
@@ -92,6 +68,21 @@ export default defineComponent({
     const ebooks = ref();
     const ebooks1 = reactive({books: []});
 
+    const f = (count: number) => {
+      console.log(count);
+      axios.get('/ebook/list', {
+        params: {
+          page: 1,
+          size: 1000,
+          category1Id: count,
+        }
+      }).then((response) => {
+        const data = response.data;
+        ebooks.value = data.content.list;
+        // ebooks1.books = data.content;
+      });
+    }
+
     onMounted(() => {
       axios.get('/ebook/list', {
         params: {
@@ -106,6 +97,7 @@ export default defineComponent({
     });
 
     return {
+      f,
       ebooks,
       // ebooks2: toRef(ebooks1, "books"),
       // listData,

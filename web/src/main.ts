@@ -1,4 +1,4 @@
-import {createApp} from 'vue'
+import {createApp, ref} from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -8,6 +8,8 @@ import * as Icons from '@ant-design/icons-vue'
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.VUE_APP_SERVER;
+
+App.visible = ref(false);
 
 // axios 拦截器
 axios.interceptors.request.use(function (config) {

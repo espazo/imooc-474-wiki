@@ -15,6 +15,7 @@ import org.springframework.core.env.Environment;
 public class WikiApplication {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WikiApplication.class);
+	public static boolean isLogin = false;
 
 	public static void main(String[] args) {
 //		SpringApplication.run(WikiApplication.class, args);

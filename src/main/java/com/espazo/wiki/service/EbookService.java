@@ -34,6 +34,11 @@ public class EbookService {
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
 
+        if (req.getCategory1Id() != 0) {
+            System.out.println(req.getCategory1Id());
+            criteria.andCategory1IdEqualTo(req.getCategory1Id());
+        }
+
         if (!ObjectUtils.isEmpty(req.getName())) {
             criteria.andNameLike("%" + req.getName() + "%");
         }

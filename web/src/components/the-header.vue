@@ -7,22 +7,37 @@
         theme="dark"
     >
       <a-menu-item key="/">
-        <router-link to="/">首页</router-link>
+        <router-link to="/">房产信息管理系统</router-link>
       </a-menu-item>
-      <a-menu-item key="/admin/ebook">
-        <router-link to="/admin/ebook">电子书管理</router-link>
+      <a-menu-item v-if="visible" key="/admin/ebook">
+        <router-link to="/admin/ebook">房产管理</router-link>
       </a-menu-item>
-      <a-menu-item key="/about">
-        <router-link to="/about">关于我们</router-link>
+      <a-menu-item v-if="!visible" key="/about">
+        <router-link to="/about">登录</router-link>
       </a-menu-item>
     </a-menu>
   </a-layout-header>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, ref} from 'vue';
+import {useStore} from "vuex";
 
 export default defineComponent({
   name: 'the-header',
+  setup() {
+    const store = useStore();
+    const visible = ref(false);
+    const si = setInterval(function () {
+      visible.value = store.state.visible;
+      console.log(visible.value);
+      if (visible.value) {
+        clearInterval(si);
+      }
+    }, 1000);
+    return {
+      visible
+    }
+  },
 });
 </script>
