@@ -47,7 +47,8 @@ CREATE TABLE `category` (
     `id` BIGINT NOT NULL COMMENT 'id',
     `parent` BIGINT NOT NULL DEFAULT 0 COMMENT '父 id',
     `name` VARCHAR(50) NOT NULL COMMENT '名称',
-    `sort` INT COMMENT '顺序'
+    `sort` INT COMMENT '顺序',
+    PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4 COMMENT='分类';
 
 INSERT INTO `category` (id, parent, name, sort) VALUES (100, 000, '前端开发', 100);
