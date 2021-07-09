@@ -4,7 +4,7 @@
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
       <p>
-        <a-form layout="inline" :model="param">
+        <a-form :model="param" layout="inline">
           <a-form-item>
             <a-button type="primary" @click="handleQuery()">
               查询
@@ -19,14 +19,14 @@
       </p>
       <a-table
           :columns="columns"
-          :row-key="record => record.id"
           :data-source="level1"
           :loading="loading"
-          @change="handleTableChange"
           :pagination="false"
+          :row-key="record => record.id"
+          @change="handleTableChange"
       >
         <template #cover="{ text: cover }">
-          <img v-if="cover" :src="cover" alt="avatar" />
+          <img v-if="cover" :src="cover" alt="avatar"/>
         </template>
         <template v-slot:action="{ text, record }">
           <a-space size="small">
@@ -34,9 +34,9 @@
               编辑
             </a-button>
             <a-popconfirm
-                title="删除后不可恢复，确认删除？"
-                ok-text="是"
                 cancel-text="否 "
+                ok-text="是"
+                title="删除后不可恢复，确认删除？"
             >
               <a-button type="danger">
                 删除
@@ -50,17 +50,27 @@
   </a-layout>
 
   <a-modal
-      title="分类表单"
       v-model:visible="modalVisible"
       :confirm-loading="modalLoading"
+      title="分类表单"
       @ok="handleModalOK"
   >
-    <a-form :model="category" :label-col="{ span: 6 }">
+    <a-form :label-col="{ span: 6 }" :model="category">
       <a-form-item label="名称">
         <a-input v-model:value="category.name"/>
       </a-form-item>
       <a-form-item label="父分类">
-        <a-input v-model:value="category.parent"/>
+        <a-select
+            ref="select"
+            v-model:value="category.parent"
+        >
+          <a-select-option value="0">
+            无
+          </a-select-option>
+          <a-select-option v-for="c in level1" :key="c.id" :value="c.id" :disabled="category.id === c.id">
+            {{c.name}}
+          </a-select-option>
+        </a-select>
       </a-form-item>
       <a-form-item label="顺序">
         <a-input v-model:value="category.sort"/>
@@ -100,7 +110,7 @@ export default defineComponent({
       {
         title: 'Action',
         key: 'action',
-        slots: { customRender: 'action' }
+        slots: {customRender: 'action'}
       }
     ];
 
