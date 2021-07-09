@@ -3,7 +3,7 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
-      <a-row>
+      <a-row :gutter="24">
         <a-col :span="8">
           <p>
             <a-form :model="param" layout="inline">
@@ -25,14 +25,15 @@
               :loading="loading"
               :pagination="false"
               :row-key="record => record.id"
+              size="small"
               @change="handleTableChange"
           >
-            <template #cover="{ text: cover }">
-              <img v-if="cover" :src="cover" alt="avatar"/>
+            <template #name="{ text, record }">
+              {{ record.sort }} {{ text }}
             </template>
             <template v-slot:action="{ text, record }">
               <a-space size="small">
-                <a-button type="primary" @click="edit(record)">
+                <a-button size="small" type="primary" @click="edit(record)">
                   编辑
                 </a-button>
                 <a-popconfirm
@@ -41,7 +42,7 @@
                     title="删除后不可恢复，确认删除？"
                     @confirm="showConfirm(record.id)"
                 >
-                  <a-button type="danger">
+                  <a-button size="small" type="danger">
                     删除
                   </a-button>
                 </a-popconfirm>
@@ -51,11 +52,20 @@
           </a-table>
         </a-col>
         <a-col :span="16">
-          <a-form :label-col="{ span: 6 }" :model="doc">
-            <a-form-item label="名称">
-              <a-input v-model:value="doc.name"/>
+          <p>
+            <a-form :model="param" layout="inline">
+              <a-form-item>
+                <a-button type="primary" @click="handleSave()">
+                  保存
+                </a-button>
+              </a-form-item>
+            </a-form>
+          </p>
+          <a-form :label-col="{ span: 6 }" :model="doc" layout="vertical">
+            <a-form-item>
+              <a-input v-model:value="doc.name" placeholder="名称"/>
             </a-form-item>
-            <a-form-item label="名称">
+            <a-form-item>
               <a-tree-select
                   v-model:value="doc.parent"
                   :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
@@ -67,23 +77,23 @@
               >
               </a-tree-select>
             </a-form-item>
-            <a-form-item label="父文档">
-              <a-select
-                  ref="select"
-                  v-model:value="doc.parent"
-              >
-                <a-select-option value="0">
-                  无
-                </a-select-option>
-                <a-select-option v-for="c in level1" :key="c.id" :disabled="doc.id === c.id" :value="c.id">
-                  {{ c.name }}
-                </a-select-option>
-              </a-select>
+            <!--            <a-form-item>-->
+            <!--              <a-select-->
+            <!--                  ref="select"-->
+            <!--                  v-model:value="doc.parent"-->
+            <!--              >-->
+            <!--                <a-select-option value="0">-->
+            <!--                  无-->
+            <!--                </a-select-option>-->
+            <!--                <a-select-option v-for="c in level1" :key="c.id" :disabled="doc.id === c.id" :value="c.id">-->
+            <!--                  {{ c.name }}-->
+            <!--                </a-select-option>-->
+            <!--              </a-select>-->
+            <!--            </a-form-item>-->
+            <a-form-item>
+              <a-input v-model:value="doc.sort" placeholder="顺序"/>
             </a-form-item>
-            <a-form-item label="顺序">
-              <a-input v-model:value="doc.sort"/>
-            </a-form-item>
-            <a-form-item label="内容">
+            <a-form-item>
               <div id="content"></div>
             </a-form-item>
           </a-form>
@@ -131,16 +141,8 @@ export default defineComponent({
     const columns = [
       {
         title: '名称',
-        dataIndex: 'name'
-      },
-      {
-        title: '父文档',
-        key: 'parent',
-        dataIndex: 'parent'
-      },
-      {
-        title: '顺序',
-        dataIndex: 'sort'
+        dataIndex: 'name',
+        slots: {customRender: 'name'}
       },
       {
         title: 'Action',
@@ -192,8 +194,9 @@ export default defineComponent({
     const doc = ref({});
     const modalVisible = ref(false);
     const modalLoading = ref(false);
+    let editor;
 
-    const handleModalOK = () => {
+    const handleSave = () => {
       modalLoading.value = true;
       axios.post("/doc/save", doc.value).then((response) => {
         modalLoading.value = false;
@@ -288,9 +291,6 @@ export default defineComponent({
 
       // 为选择树添加一个”无“
       treeSelectData.value.unshift({id: 0, name: '无'});
-      setTimeout(function () {
-        new E('#content').create();
-      }, 100);
     }
 
     /**
@@ -306,9 +306,6 @@ export default defineComponent({
 
       // 为选择树添加一个“无”
       treeSelectData.value.unshift({id: 0, name: '无'});
-      setTimeout(function () {
-        new E('#content').create();
-      }, 100);
     }
 
     /**
@@ -346,6 +343,9 @@ export default defineComponent({
 
     onMounted(() => {
       handleQuery();
+      editor = new E('#content');
+      editor.config.zIndex = 0;
+      editor.create();
     });
 
     return {
@@ -365,7 +365,7 @@ export default defineComponent({
       doc,
       modalVisible,
       modalLoading,
-      handleModalOK,
+      handleSave,
 
       handleQuery,
       showConfirm,
