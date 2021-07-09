@@ -30,6 +30,7 @@ export class Tool {
     /**
      * 使用递归将数组转为树形结构
      * 父ID属性为parent
+     * 数组长度为 n，层次为 c，算法复杂度为 n 的 c 次方
      */
     public static array2Tree (array: any, parentId: number) {
         if (Tool.isEmpty(array)) {
