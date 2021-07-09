@@ -20,6 +20,7 @@
             </a-form>
           </p>
           <a-table
+              v-if="level1.length > 0"
               :columns="columns"
               :data-source="level1"
               :loading="loading"
@@ -27,6 +28,7 @@
               :row-key="record => record.id"
               size="small"
               @change="handleTableChange"
+              :defaultExpandAllRows="true"
           >
             <template #name="{ text, record }">
               {{ record.sort }} {{ text }}
@@ -163,7 +165,7 @@ export default defineComponent({
      * }]
      **/
     const level1 = ref();
-
+    level1.value = [];
     /**
      * 数据查询
      **/
