@@ -7,17 +7,16 @@
           @click="handleClick"
       >
         <a-menu-item key="welcome">
-          <router-link :to="'/'">
-            <MailOutlined/>
-            <span>欢迎</span>
-          </router-link>
+          <MailOutlined/>
+          <span>欢迎</span>
         </a-menu-item>
         <a-sub-menu v-for="item in level1" :key="item.id">
           <template v-slot:title>
-            <span><user-outlined/>{{item.name}}</span>
+            <span><user-outlined/>{{ item.name }}</span>
           </template>
           <a-menu-item v-for="child in item.children" :key="child.id">
-            <MailOutlined/><span>{{child.name}}</span>
+            <MailOutlined/>
+            <span>{{ child.name }}</span>
           </a-menu-item>
         </a-sub-menu>
       </a-menu>
@@ -25,7 +24,11 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
-      <a-list :data-source="ebooks" :grid="{ gutter: 20, column: 3 }" item-layout="vertical" size="large">
+      <div v-show="isShowWelcome" class="welcome">
+        <h1>欢迎使用知识库</h1>
+      </div>
+      <a-list v-show="!isShowWelcome" :data-source="ebooks" :grid="{ gutter: 20, column: 3 }" item-layout="vertical"
+              size="large">
         <template #renderItem="{ item }">
           <a-list-item key="item.name">
             <template #actions>
@@ -97,8 +100,16 @@ export default defineComponent({
       });
     };
 
-    const handleClick = () => {
-      console.log("menu click");
+    const isShowWelcome = ref(true);
+
+    const handleClick = (value: any) => {
+      // console.log("menu click", value);
+      // if (value.key === 'welcome') {
+      //   isShowWelcome.value = true;
+      // } else {
+      //   isShowWelcome.value = false;
+      // }
+      isShowWelcome.value = value.key === 'welcome';
     };
 
     onMounted(() => {
@@ -133,6 +144,8 @@ export default defineComponent({
 
       handleClick,
       level1,
+
+      isShowWelcome,
     }
   }
 });
