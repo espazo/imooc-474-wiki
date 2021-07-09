@@ -132,6 +132,8 @@ export default defineComponent({
      **/
     const handleQuery = () => {
       loading.value = true;
+      // 需要清空数据之后，才能正在加载
+      level1.value = [];
       axios.get("/category/all").then((response) => {
         loading.value = false;
         const data = response.data;
