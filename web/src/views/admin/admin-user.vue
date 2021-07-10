@@ -83,6 +83,9 @@ import axios from 'axios';
 import {message} from 'ant-design-vue'
 import {Tool} from "@/util/tool";
 
+declare let hexMd5: any;
+declare let KEY: any;
+
 export default defineComponent({
   name: 'AdminUser',
   setup() {
@@ -161,12 +164,14 @@ export default defineComponent({
     /**
      * 数组 [100, 101] 对应：前端开发 / Vue
      **/
-    const categoryIds = ref();
     const user = ref();
     const modalVisible = ref(false);
     const modalLoading = ref(false);
     const handleModalOK = () => {
       modalLoading.value = true;
+
+      user.value.password = hexMd5(user.value.password + KEY);
+
       axios.post("/user/save", user.value).then((response) => {
         modalLoading.value = false;
         const data = response.data; // data => CommonResp
@@ -190,7 +195,6 @@ export default defineComponent({
     const edit = (record: any) => {
       modalVisible.value = true;
       user.value = Tool.copy(record);
-      categoryIds.value = [user.value.category1Id, user.value.category2Id];
     }
 
     /**
@@ -240,7 +244,6 @@ export default defineComponent({
       modalVisible,
       modalLoading,
       handleModalOK,
-      categoryIds,
 
       handleQuery
     }
