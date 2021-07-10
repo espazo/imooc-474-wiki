@@ -173,7 +173,7 @@ export default defineComponent({
       loading.value = true;
       // 清空数据之后，才能正在加载
       level1.value = [];
-      axios.get("/doc/all").then((response) => {
+      axios.get("/doc/all/" + route.query.ebookId).then((response) => {
         loading.value = false;
         const data = response.data;
         if (data.success) {
