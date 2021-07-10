@@ -103,3 +103,16 @@ CREATE TABLE `content`
     PRIMARY KEY (`id`)
 ) ENGINE = INNODB
   DEFAULT CHARSET = UTF8MB4 COMMENT ='文档内容';
+
+### 用户表
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`
+(
+    `id`         BIGINT      NOT NULL COMMENT 'ID',
+    `login_name` VARCHAR(50) NOT NULL COMMENT '登录名',
+    `name`       VARCHAR(50) COMMENT '昵称',
+    `password`   CHAR(32)    NOT NULL COMMENT '密码',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `login_name_unique` (`login_name`)
+) ENGINE = INNODB
+  DEFAULT CHARSET = UTF8MB4 COMMENT ='用户';
