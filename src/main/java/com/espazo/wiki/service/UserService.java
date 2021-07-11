@@ -5,10 +5,12 @@ import com.espazo.wiki.domain.UserExample;
 import com.espazo.wiki.exception.BusinessException;
 import com.espazo.wiki.exception.BusinessExceptionCode;
 import com.espazo.wiki.mapper.UserMapper;
+import com.espazo.wiki.req.UserLoginReq;
 import com.espazo.wiki.req.UserQueryReq;
 import com.espazo.wiki.req.UserResetPasswordReq;
 import com.espazo.wiki.req.UserSaveReq;
 import com.espazo.wiki.resp.PageResp;
+import com.espazo.wiki.resp.UserLoginResp;
 import com.espazo.wiki.resp.UserQueryResp;
 import com.espazo.wiki.util.CopyUtil;
 import com.espazo.wiki.util.SnowFlake;
@@ -117,5 +119,27 @@ public class UserService {
     public void restPassword(UserResetPasswordReq req) {
         User user = CopyUtil.copy(req, User.class);
         userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 登录
+     */
+    public UserLoginResp login(UserLoginReq req) {
+        User userDb = selectByLoginName(req.getLoginName());
+        if (ObjectUtils.isEmpty(userDb)) {
+            // 用户名不存在
+            LOG.info("用户名不存在，{}", req.getLoginName());
+            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+        } else {
+            if (userDb.getPassword().equals(req.getPassword())) {
+                // 登录成功
+                UserLoginResp userLoginResp = CopyUtil.copy(userDb, UserLoginResp.class);
+                return userLoginResp;
+            } else {
+                // 密码不正确
+                LOG.info("密码不正确，输入密码：{}，数据库密码：{}", req.getPassword(), userDb.getPassword());
+                throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+            }
+        }
     }
 }

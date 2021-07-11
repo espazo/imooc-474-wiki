@@ -1,10 +1,12 @@
 package com.espazo.wiki.controller;
 
+import com.espazo.wiki.req.UserLoginReq;
 import com.espazo.wiki.req.UserQueryReq;
 import com.espazo.wiki.req.UserResetPasswordReq;
 import com.espazo.wiki.req.UserSaveReq;
 import com.espazo.wiki.resp.CommonResp;
 import com.espazo.wiki.resp.PageResp;
+import com.espazo.wiki.resp.UserLoginResp;
 import com.espazo.wiki.resp.UserQueryResp;
 import com.espazo.wiki.service.UserService;
 import org.springframework.util.DigestUtils;
@@ -48,6 +50,15 @@ public class UserController {
         req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         CommonResp resp = new CommonResp<>();
         userService.restPassword(req);
+        return resp;
+    }
+
+    @PostMapping("/login")
+    public CommonResp login(@Valid @RequestBody UserLoginReq req) {
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
+        CommonResp<UserLoginResp> resp = new CommonResp<>();
+        UserLoginResp userLoginResp = userService.login(req);
+        resp.setContent(userLoginResp);
         return resp;
     }
 }
