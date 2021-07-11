@@ -34,7 +34,8 @@
       title="登录"
       @ok="login"
   >
-    <a-form :label-col="{ span: 6 }" :model="loginUser" :wrapper-col="{ span: 18 }">
+    <a-form :label-col="{ span: 6 }" :model="loginUser" :wrapper-col="{ span: 18
+    }">
       <a-form-item label="登录名">
         <a-input v-model:value="loginUser.loginName"/>
       </a-form-item>
@@ -58,7 +59,7 @@ export default defineComponent({
   setup() {
     const loginUser = ref({
       loginName: "test",
-      password: "test",
+      password: "test123",
     });
     const loginModalVisible = ref(false);
     const loginModalLoading = ref(false);
