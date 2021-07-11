@@ -6,6 +6,7 @@ import com.espazo.wiki.exception.BusinessException;
 import com.espazo.wiki.exception.BusinessExceptionCode;
 import com.espazo.wiki.mapper.UserMapper;
 import com.espazo.wiki.req.UserQueryReq;
+import com.espazo.wiki.req.UserResetPasswordReq;
 import com.espazo.wiki.req.UserSaveReq;
 import com.espazo.wiki.resp.PageResp;
 import com.espazo.wiki.resp.UserQueryResp;
@@ -108,5 +109,13 @@ public class UserService {
         } else {
             return userList.get(0);
         }
+    }
+
+    /**
+     * 修改密码
+     */
+    public void restPassword(UserResetPasswordReq req) {
+        User user = CopyUtil.copy(req, User.class);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 }
